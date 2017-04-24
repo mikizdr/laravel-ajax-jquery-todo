@@ -76,8 +76,12 @@
                    $('#delete').hide(400);
                    $('#saveChanges').hide(400);
                    $('#AddButton').show(400);
-                   console.log('jquery works');
+                   console.log('jquery works on Add New button');
            });
+           $('#AddButton').click(function(event) {
+                var text = $('#addItem').val();
+                console.log(text);
+           })
         });
     </script>
 </body>
