@@ -38,14 +38,14 @@
             <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Add New Item</h4>
+                <h4 class="modal-title" id="title">Add New Item</h4>
             </div>
             <div class="modal-body">
                 <p><input type="text" class="form-control" id="addItem" placeholder="Write here..."></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" style="display: none">Close</button>
-                <button type="button" class="btn btn-primary" style="display: none">Save changes</button>
+                <button type="button" class="btn btn-warning" id="delete" data-dismiss="modal" style="display: none">Delete</button>
+                <button type="button" class="btn btn-danger" id="saveChanges" style="display: none">Save changes</button>
                 <button type="button" class="btn btn-primary" id="AddButton">Add Item</button>
             </div>
             </div><!-- /.modal-content -->
@@ -61,6 +61,7 @@
            $('.ourItem').each(function() {
                $(this).click(function(event) {
                    var text = $(this).text()
+                   $('#title').text('Edit Item');
                    $('#addItem').val(text);
                    console.log(text);
                });
