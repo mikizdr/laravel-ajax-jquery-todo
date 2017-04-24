@@ -37,7 +37,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" id="addNew" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="title">Add New Item</h4>
             </div>
             <div class="modal-body">
@@ -68,6 +68,15 @@
                    $('#AddButton').hide(400);
                    console.log(text);
                });
+           });
+
+           $('#addNew').click(function(event) {
+                   $('#title').text('Add New Item');
+                   $('#addItem').val("");
+                   $('#delete').hide(400);
+                   $('#saveChanges').hide(400);
+                   $('#AddButton').show(400);
+                   console.log('jquery works');
            });
         });
     </script>
