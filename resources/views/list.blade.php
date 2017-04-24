@@ -20,11 +20,11 @@
                     </div>
                     <div class="panel-body">
                         <ul class="list-group">
-                            <li class="list-group-item ourItem">Cras justo odio</li>
-                            <li class="list-group-item ourItem">Dapibus ac facilisis in</li>
-                            <li class="list-group-item ourItem">Morbi leo risus</li>
-                            <li class="list-group-item ourItem">Porta ac consectetur ac</li>
-                            <li class="list-group-item ourItem">Vestibulum at eros</li>
+                            <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Cras justo odio</li>
+                            <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Dapibus ac facilisis in</li>
+                            <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Morbi leo risus</li>
+                            <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Porta ac consectetur ac</li>
+                            <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">Vestibulum at eros</li>
                         </ul>
                     </div>
                 </div>
@@ -61,6 +61,7 @@
            $('.ourItem').each(function() {
                $(this).click(function(event) {
                    var text = $(this).text()
+                   $('#addItem').val(text);
                    console.log(text);
                });
            });
