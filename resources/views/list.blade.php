@@ -63,6 +63,9 @@
                    var text = $(this).text()
                    $('#title').text('Edit Item');
                    $('#addItem').val(text);
+                   $('#delete').show(400);
+                   $('#saveChanges').show(400);
+                   $('#AddButton').hide(400);
                    console.log(text);
                });
            });
