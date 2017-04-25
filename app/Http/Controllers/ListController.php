@@ -10,7 +10,8 @@ class ListController extends Controller
     //
     public function index()
     {
-        return view('list');
+        $items = Item::all();
+        return view('list', compact('items'));
     }    
     
     public function create(request $request)
@@ -19,5 +20,11 @@ class ListController extends Controller
         $item->item = $request->text;
         $item->save();
         return 'It`s done.';
+    }
+
+    public function delete(request $request)
+    {
+        Item::where('id', $request->id)->delete()
+;        return $request->all();
     }
 }
