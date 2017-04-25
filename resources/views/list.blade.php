@@ -13,15 +13,15 @@
 <br>
     <div class="container">
         <div class="row">
-            <div class="col-lg-offset-3 col-lg-6">
+            <div class="col-lg-offset-3 col-lg-6" id="itemsList">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Ajax ToDo List <a href="#" class="pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i></a></h3>
                     </div>
-                    <div class="panel-body" id="itemsList">
+                    <div class="panel-body" >
                         <ul class="list-group">
                             @foreach ($items as $item)
-                                <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal">{{$item->item}}
+                                <li class="list-group-item ourItem" data-toggle="modal" data-target="#myModal" style="cursor: pointer;">{{$item->item}}
                                     <input type="hidden" id="itemId" value="{{$item->id}}">
                                 </li>
                             @endforeach
@@ -46,7 +46,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-warning" id="delete" data-dismiss="modal" style="display: none">Delete</button>
-                <button type="button" class="btn btn-danger" id="saveChanges" style="display: none">Save changes</button>
+                <button type="button" class="btn btn-danger" id="saveChanges" data-dismiss="modal" style="display: none">Save changes</button>
                 <button type="button" class="btn btn-primary" id="AddButton" data-dismiss="modal">Add Item</button>
             </div>
             </div><!-- /.modal-content -->
@@ -60,15 +60,15 @@
     <script>
         $(document).ready(function() {
             $(document).on('click', '.ourItem', function(event){
-                   var text = $(this).text()
-                   var id = $(this).find("#itemId").val();
-                   $('#title').text('Edit Item');
-                   $('#addItem').val(text);
-                   $('#delete').show(400);
-                   $('#saveChanges').show(400);
-                   $('#AddButton').hide(400);
-                   $('#idOfSelectedItem').val(id);
-                   console.log(text, ' with id: ',id);
+                var text = $(this).text()
+                var id = $(this).find("#itemId").val();
+                $('#title').text('Edit Item');
+                $('#addItem').val(text);
+                $('#delete').show(400);
+                $('#saveChanges').show(400);
+                $('#AddButton').hide(400);
+                $('#idOfSelectedItem').val(id);
+                console.log(text, ' with id: ',id);
            });
 
            $(document).on('click', '#addNew', function(event){
@@ -93,8 +93,18 @@
                var id = $('#idOfSelectedItem').val();
                 $.post('delete', {'id': id, '_token': $('input[name=_token]').val()}, function(data) {
                     // return data from the controller on the backend side
-                    console.log(data);
                     $('#itemsList').load(location.href + ' #itemsList');
+                    console.log(data);
+                });  
+           });
+            
+           $('#saveChanges').click(function(event){
+               var id = $('#idOfSelectedItem').val();
+               var newText = $('#addItem').val();
+                $.post('update', {'id': id, 'newText': newText, '_token': $('input[name=_token]').val()}, function(data) {
+                    // return data from the controller on the backend side
+                    $('#itemsList').load(location.href + ' #itemsList');
+                    console.log(data);                    
                 });  
            });
         });
