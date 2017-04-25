@@ -15,7 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('list', 'ListController@index');
-Route::post('list', 'ListController@create');
-Route::post('delete', 'ListController@delete');
-Route::post('update', 'ListController@update');
+Route::get('list', 'ListController@index');     // get all items route
+Route::post('list', 'ListController@create');   // create route
+Route::post('delete', 'ListController@delete'); // delte route
+Route::post('update', 'ListController@update'); // update route
+
+// search route
+Route::get('search', 'ListController@search');
