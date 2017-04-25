@@ -17,4 +17,3 @@ Route::get('/', function () {
 
 Route::get('list', 'ListController@index');
 Route::post('list', 'ListController@create');
-

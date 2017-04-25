@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Item;
 
 class ListController extends Controller
 {
@@ -14,6 +15,9 @@ class ListController extends Controller
     
     public function create(request $request)
     {
-        return $request->all();
+        $item = new Item;
+        $item->item = $request->text;
+        $item->save();
+        return 'It`s done.';
     }
 }
