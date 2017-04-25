@@ -60,7 +60,7 @@
     <script>
         $(document).ready(function() {
             $(document).on('click', '.ourItem', function(event){
-                var text = $(this).text()
+                var text = $.trim($(this).text());
                 var id = $(this).find("#itemId").val();
                 $('#title').text('Edit Item');
                 $('#addItem').val(text);
@@ -82,25 +82,34 @@
               
            $('#AddButton').click(function(event) {
                 var text = $('#addItem').val();
-                $.post('list', {'text': text, '_token': $('input[name=_token]').val()}, function(data) {
-                    // return data from the controller on the backend side
-                    console.log(data);
-                    $('#itemsList').load(location.href + ' #itemsList');
-                });                
+                if(text == "") {
+                    alert('Please enter some text.');
+                } else {
+                    $.post('list', {'text': text, '_token': $('input[name=_token]').val()}, function(data) {
+                        // return data from the controller on the backend side
+                        console.log(data);
+                        $('#itemsList').load(location.href + ' #itemsList');
+                    });                
+                }                
            });
 
            $('#delete').click(function(event){
                var id = $('#idOfSelectedItem').val();
+               if(confirm('Are you sure?')) {
                 $.post('delete', {'id': id, '_token': $('input[name=_token]').val()}, function(data) {
                     // return data from the controller on the backend side
                     $('#itemsList').load(location.href + ' #itemsList');
                     console.log(data);
                 });  
+               } else {
+                   return false;
+               }
+                
            });
             
            $('#saveChanges').click(function(event){
                var id = $('#idOfSelectedItem').val();
-               var newText = $('#addItem').val();
+               var newText = $.trim($('#addItem').val());
                 $.post('update', {'id': id, 'newText': newText, '_token': $('input[name=_token]').val()}, function(data) {
                     // return data from the controller on the backend side
                     $('#itemsList').load(location.href + ' #itemsList');
